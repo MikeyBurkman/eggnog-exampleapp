@@ -1,0 +1,14 @@
+
+var eggnog = require('eggnog');
+
+// First demonstrate how an app might use eggnog.
+// Create a new eggnog context, and load in all files in the app diretory
+var context = eggnog.newContext();
+var root = __dirname + '/testapp';
+console.log('loading from root directory: ', root);
+context.scanForFiles(root); // Load all files in ./testapp
+
+// Assuming one of those modules loaded was desginated as a main module, we can do this.
+// The return value is the return value of the init() method on the main module.
+var startup = context.main();
+console.log('Startup successful: ', startup);
