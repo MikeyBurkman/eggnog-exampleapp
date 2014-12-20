@@ -28,3 +28,7 @@ context.scanForFiles({
 // The return value is the return value of the init() method on the main module.
 var startup = context.main();
 console.log('Startup successful: ', startup);
+
+console.log('main module id: ', context.getMainModuleId());
+console.log('dependencies starting from main:');
+context.printDependencies(context.getMainModuleId());
