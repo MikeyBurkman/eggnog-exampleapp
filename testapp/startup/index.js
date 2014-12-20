@@ -1,5 +1,4 @@
 module.exports = {
-	id: 'appStart',
 	isMain: true,
 	import: [{
 		id: 'services.messageService',
