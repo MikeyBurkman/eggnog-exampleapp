@@ -1,0 +1,23 @@
+{
+  "name": "eggnog-exampleapp",
+  "version": "0.0.2",
+  "dependencies": {
+    "eggnog": "0.0.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MikeyBurkman/eggnog-exampleapp.git"
+  },
+  "author": {
+    "name": "Michael Burkman",
+    "url": "https://github.com/MikeyBurkman"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
