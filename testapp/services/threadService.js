@@ -1,10 +1,12 @@
 module.exports = {
 	import: [],
-	init: init
+	init: init,
+	scope: 'instance'
 };
 
+var id = 1;
 function init(imports) {
-	console.log('thread service! ', imports);
+	console.log('thread service! ', id++);
 	return {
 		stuff: 'This is some stuff!'
 	};

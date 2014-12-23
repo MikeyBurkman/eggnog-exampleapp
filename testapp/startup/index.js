@@ -3,7 +3,7 @@ module.exports = {
 	import: [{
 		id: 'services.messageService',
 		as: 'messageService'
-	}],
+	}, 'services.threadService'],
 	init: init
 };
 
