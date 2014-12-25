@@ -1,15 +1,17 @@
 module.exports = {
 	isMain: true,
-	import: [{
-		id: 'services.messageService',
-		as: 'messageService'
-	}, 'services.threadService'],
+	import: [
+		'services.messageService',
+		'services.threadService'
+	],
 	init: init
 };
 
 function init(imports) {
-	console.log('appstart! ', imports);
-	var messageService = imports.messageService;
+	console.log('Initializing appstart: ', imports);
+
+	var messageService = imports['services.messageService'];
+	var threadService = imports['services.threadService'];
 
 	console.log('result of calling messageService.something: ', messageService.something());
 

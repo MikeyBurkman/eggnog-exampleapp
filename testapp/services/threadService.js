@@ -6,8 +6,12 @@ module.exports = {
 
 var id = 1;
 function init(imports) {
-	console.log('thread service! ', id++);
+	console.log('initializing thread service: ', imports);
+
+	var myId = id++;
+	console.log('this thread service ID: ', myId);
+
 	return {
-		stuff: 'This is some stuff!'
+		stuff: 'This is my ID: ' + myId
 	};
 }

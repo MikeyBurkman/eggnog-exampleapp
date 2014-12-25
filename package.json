@@ -2,7 +2,7 @@
   "name": "eggnog-exampleapp",
   "version": "0.0.1",
   "dependencies": {
-    "eggnog": "0.0.4"
+    "eggnog": "0.1.0"
   },
   "repository": {
     "type": "git",
