@@ -1,5 +1,5 @@
 
-var eggnog = require('../eggnog');
+var eggnog = require('eggnog');
 
 // To demonstrate unit testing:
 // Require a single file, and give a mapping of each dependency for the imports.
