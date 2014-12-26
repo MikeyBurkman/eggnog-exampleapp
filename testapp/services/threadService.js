@@ -6,7 +6,7 @@ module.exports = {
 
 var id = 1;
 function init(imports) {
-	console.log('initializing thread service: ', imports);
+	console.log('initializing thread service: ', imports.all());
 
 	var myId = id++;
 	console.log('this thread service ID: ', myId);

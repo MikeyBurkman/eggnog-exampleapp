@@ -6,8 +6,8 @@ module.exports = {
 };
 
 function init(imports) {
-	console.log('intializing message service: ', imports);
-	var threadService = imports['services.threadService'];
+	console.log('intializing message service: ', imports.all());
+	var threadService = imports.get('services.threadService');
 
 	return {
 		something: function() {

@@ -8,10 +8,10 @@ module.exports = {
 };
 
 function init(imports) {
-	console.log('Initializing appstart: ', imports);
+	console.log('Initializing appstart: ', imports.all());
 
-	var messageService = imports['services.messageService'];
-	var threadService = imports['services.threadService'];
+	var messageService = imports.get('services.messageService');
+	var threadService = imports.get('services.threadService');
 
 	console.log('result of calling messageService.something: ', messageService.something());
 
