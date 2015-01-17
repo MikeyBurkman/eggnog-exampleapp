@@ -3,7 +3,9 @@ var eggnog = require('eggnog');
 
 // First demonstrate how an app might use eggnog.
 // Create a new eggnog context, and load in all files in the app diretory
-var context = eggnog.newContext();
+var context = eggnog.newContext({
+	externalRoot: __dirname
+});
 var root = __dirname + '/testapp';
 
 // Here we're scanning for files in both services and startup. Because the baseDir is

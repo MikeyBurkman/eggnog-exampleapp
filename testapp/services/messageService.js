@@ -1,15 +1,21 @@
 module.exports = {
-	import: [
+	imports: [
 		'services.threadService'
+	],
+	extImports: [
+		'fs'
 	],
 	init: init
 };
 
-function init(imports) {
-	console.log('intializing message service: ', imports.all());
-	var threadService = imports.get('services.threadService');
+function init(eggnog) {
+	console.log('intializing message service');
+	var threadService = eggnog.import('services.threadService');
+	var fs = eggnog.import('fs');
 
-	return {
+	console.log('messageService: files in my directory: ', fs.readdirSync(__dirname));
+
+	eggnog.exports = {
 		something: function() {
 			console.log('Calling messageService.something');
 			return threadService.stuff;

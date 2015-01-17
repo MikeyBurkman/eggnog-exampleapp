@@ -6,8 +6,19 @@ var eggnog = require('eggnog');
 
 var messageService = __dirname + '/testapp/services/messageService.js';
 var testMessageService = eggnog.singleModule(messageService, {
-	'services.threadService': {
-		stuff: 'this is a test message!'
+	imports: {
+		'services.threadService': {
+			stuff: 'this is a test message!'
+		}
+	},
+	extImports: {
+		'fs': {
+			readdirSync: function(dir) {
+				// Could validate dir here... probably not a good example really
+				// For now, just demonstrate that we can return our own value
+				return ['testDirectory']; 
+			}
+		}
 	}
 });
 var testOutput = testMessageService.something();

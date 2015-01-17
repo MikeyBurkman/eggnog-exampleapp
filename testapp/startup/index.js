@@ -1,19 +1,19 @@
 module.exports = {
 	isMain: true,
-	import: [
+	imports: [
 		'services.messageService',
 		'services.threadService'
 	],
 	init: init
 };
 
-function init(imports) {
-	console.log('Initializing appstart: ', imports.all());
+function init(eggnog) {
+	console.log('Initializing appstart');
 
-	var messageService = imports.get('services.messageService');
-	var threadService = imports.get('services.threadService');
+	var messageService = eggnog.import('services.messageService');
+	var threadService = eggnog.import('services.threadService');
 
 	console.log('result of calling messageService.something: ', messageService.something());
 
-	return true;
+	eggnog.exports = true;
 }
