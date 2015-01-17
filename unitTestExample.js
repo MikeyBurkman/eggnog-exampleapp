@@ -12,12 +12,12 @@ var testMessageService = eggnog.singleModule(messageService, {
 		}
 	},
 	extImports: {
-		'fs': {
-			readdirSync: function(dir) {
-				// Could validate dir here... probably not a good example really
-				// For now, just demonstrate that we can return our own value
-				return ['testDirectory']; 
+		'request': function(url, callback) {
+			if (url != 'https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md') {
+				throw 'Unexpected url: ' + url;
 			}
+
+			callback(undefined, undefined, 'Test response body');
 		}
 	}
 });
