@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "eggnog": "0.3.0",
-    "request": "2.51.x"
+    "request": "~2.51.0",
+    "express": "~4.11.0",
+    "q": "~1.1.0"
   },
   "repository": {
     "type": "git",
