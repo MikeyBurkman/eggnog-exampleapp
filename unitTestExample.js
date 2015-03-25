@@ -8,7 +8,7 @@ var context = eggnog.newSingleModuleContext(__dirname + '/testapp/src');
 function testLogger() {
 	var mockConsole = {
 		log: function(msgPrefix, msg) {
-			if (msgPrefix + msg != 'DEBUG: test message') throw ('Wrong input! ' + msg);
+			assertEqual('DEBUG: test message', msgPrefix + msg);
 		}
 	};
 
@@ -22,25 +22,56 @@ function testLogger() {
 	console.log('logger test successful');
 }
 
-function testService() {
-	// TODO Complete this
+function testServiceSuccess() {
+	var expectedFunctionResponse = 'response!';
+	var testResponseBody = 'test response body'
 	var testService = context.buildModule('services.getReadmeService', {
 		imports: {
-			'services.threadService': {
-				stuff: 'this is a test message!'
+			'util.logger': {
+				debug: function() { }
 			}
 		},
 		extImports: {
+			'q': mockQ(false, testResponseBody, expectedFunctionResponse),
 			'request': function(url, callback) {
-				if (url != 'https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md') {
-					throw 'Unexpected url: ' + url;
-				}
-
-				callback(undefined, undefined, 'Test response body');
+				assertEqual('https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md', url);
+				callback(undefined, {statusCode: 200}, testResponseBody);
 			}
 		}
 	});
+
+	var actualResp = testService.getReadme('MikeyBurkman', 'eggnog');
+	assertEqual(expectedFunctionResponse, actualResp);
+
+	console.log('testServiceSuccess successful');
 }
 
 testLogger();
-testService();
+testServiceSuccess();
+
+function mockQ(expectError, expectResult, promiseResponse) {
+	var defer = function() {
+		return {
+			resolve: function(actualResult) {
+				if (expectError || actualResult !== expectResult) {
+					throw 'Unexpected Q resolve: ' + r;
+				}
+			},
+			reject: function(actualResult) {
+				if (!expectError || actualResult !== expectResult) {
+					throw 'Unexepected Q reject: ' + r;
+				}
+			},
+			promise: promiseResponse
+		}
+	};
+	return {
+		defer: defer
+	};
+}
+
+function assertEqual(expected, actual) {
+	if (actual !== expected) {
+		throw 'Unexpected result: ' + actual + '; expected: ' + expected;
+	}
+}
