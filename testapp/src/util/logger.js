@@ -3,10 +3,13 @@ module.exports = {
 }
 
 function init(eggnog) {
+
 	eggnog.exports = {
 		debug: debug,
 		error: error
 	};
+	
+	var console = eggnog.global('console');
 
 	function debug() {
 		console.log.apply(console, prependArgs('DEBUG: ', arguments));

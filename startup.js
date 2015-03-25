@@ -1,11 +1,10 @@
 
-var eggnog = require('eggnog')
+var eggnog = require('../eggnog')
 
 var ctx = eggnog.newContext({
-	externalRoot: __dirname
+	nodeModulesAt: __dirname
 });
-var root = __dirname + '/testapp/src';
 
-ctx.scanForFiles(root);
+ctx.addDirectory(__dirname + '/testapp/src');
 
 ctx.main();
