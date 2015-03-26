@@ -1,4 +1,5 @@
 module.exports = {
+	globals: ['console'],
 	init: init
 }
 
