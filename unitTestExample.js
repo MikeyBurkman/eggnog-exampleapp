@@ -8,7 +8,7 @@ var context = eggnog.newSingleModuleContext(__dirname + '/testapp/src');
 function testLogger() {
 	var mockConsole = {
 		log: function(msgPrefix, msg) {
-			assertEqual('DEBUG: test message', msgPrefix + msg);
+			assertEqual('DEBUG: test message', msgPrefix + msg, 'debug message');
 		}
 	};
 
@@ -34,33 +34,56 @@ function testServiceSuccess() {
 		extImports: {
 			'q': mockQ(false, testResponseBody, expectedFunctionResponse),
 			'request': function(url, callback) {
-				assertEqual('https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md', url);
+				assertEqual('https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md', url, 'request url');
 				callback(undefined, {statusCode: 200}, testResponseBody);
 			}
 		}
 	});
 
 	var actualResp = testService.getReadme('MikeyBurkman', 'eggnog');
-	assertEqual(expectedFunctionResponse, actualResp);
+	assertEqual(expectedFunctionResponse, actualResp, 'response promise');
 
 	console.log('testServiceSuccess successful');
 }
 
+function testServiceFailure() {
+	var expectedFunctionResponse = 'response!';
+	var testError = 'test error'
+	var testService = context.buildModule('services.getReadmeService', {
+		imports: {
+			'util.logger': {
+				debug: function() { }
+			}
+		},
+		extImports: {
+			'q': mockQ(true, testError, expectedFunctionResponse),
+			'request': function(url, callback) {
+				assertEqual('https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md', url, 'request url');
+				callback(testError, undefined, undefined);
+			}
+		}
+	});
+
+	var actualResp = testService.getReadme('MikeyBurkman', 'eggnog');
+	assertEqual(expectedFunctionResponse, actualResp, 'response promise');
+
+	console.log('testServiceFailure successful');
+}
+
 testLogger();
 testServiceSuccess();
+testServiceFailure();
 
-function mockQ(expectError, expectResult, promiseResponse) {
+function mockQ(expectError, expectedResult, promiseResponse) {
 	var defer = function() {
 		return {
 			resolve: function(actualResult) {
-				if (expectError || actualResult !== expectResult) {
-					throw 'Unexpected Q resolve: ' + r;
-				}
+				assertTrue(!expectError, 'Promise should have been rejected, but was resolved with [' + actualResult + ']');
+				assertEqual(expectedResult, actualResult, 'Promise resolve result');
 			},
 			reject: function(actualResult) {
-				if (!expectError || actualResult !== expectResult) {
-					throw 'Unexepected Q reject: ' + r;
-				}
+				assertTrue(expectError, 'Promise should have been resolved, but was rejected with [' + actualResult + ']');
+				assertEqual(expectedResult, actualResult, 'Promise rejection result');
 			},
 			promise: promiseResponse
 		}
@@ -70,8 +93,14 @@ function mockQ(expectError, expectResult, promiseResponse) {
 	};
 }
 
-function assertEqual(expected, actual) {
+function assertTrue(cond, msg) {
+	if (!cond) {
+		throw 'Condition was false: ' + msg;
+	}
+}
+
+function assertEqual(expected, actual, msg) {
 	if (actual !== expected) {
-		throw 'Unexpected result: ' + actual + '; expected: ' + expected;
+		throw  'Unexpected result ' + (msg ? 'for [' + msg + ']' : '') + ': got [' + actual + ']; expected: [' + expected + ']';
 	}
 }
