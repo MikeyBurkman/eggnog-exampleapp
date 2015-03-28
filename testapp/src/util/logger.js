@@ -10,7 +10,7 @@ function init(eggnog) {
 		error: error
 	};
 	
-	var console = eggnog.global('console');
+	var console = eggnog.import('console');
 
 	function debug() {
 		console.log.apply(console, prependArgs('DEBUG: ', arguments));

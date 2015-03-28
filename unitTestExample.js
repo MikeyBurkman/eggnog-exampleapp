@@ -26,12 +26,12 @@ function testServiceSuccess() {
 	var expectedFunctionResponse = 'response!';
 	var testResponseBody = 'test response body'
 	var testService = context.buildModule('services.getReadmeService', {
-		imports: {
+		locals: {
 			'util.logger': {
 				debug: function() { }
 			}
 		},
-		extImports: {
+		externals: {
 			'q': mockQ(false, testResponseBody, expectedFunctionResponse),
 			'request': function(url, callback) {
 				assertEqual('https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md', url, 'request url');
@@ -50,12 +50,12 @@ function testServiceFailure() {
 	var expectedFunctionResponse = 'response!';
 	var testError = 'test error'
 	var testService = context.buildModule('services.getReadmeService', {
-		imports: {
+		locals: {
 			'util.logger': {
 				debug: function() { }
 			}
 		},
-		extImports: {
+		externals: {
 			'q': mockQ(true, testError, expectedFunctionResponse),
 			'request': function(url, callback) {
 				assertEqual('https://raw.githubusercontent.com/MikeyBurkman/eggnog/master/README.md', url, 'request url');
