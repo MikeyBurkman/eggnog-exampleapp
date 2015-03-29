@@ -13,6 +13,8 @@ Navigate to http://localhost:3000/:user/:project, where user and project are a G
 
 `node unitTestExample.js`
 
-The unit test files shows how you can create a context capable of creating single modules, where you can directly specify the dependency implementations that the module will use
+The unit test file shows how you can create a context capable of creating single modules, where you can directly specify the dependency implementations that the module will use.
 
 For instance, you can provide a module with mock dependencies for verifying that everything is called correctly.
+
+(This example shows how you test individual dependencies. It is strongly recommended that you use a proper unit testing framework.)
