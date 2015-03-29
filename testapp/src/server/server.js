@@ -1,10 +1,10 @@
 module.exports = {
 	isMain: true,
-	imports: [
+	locals: [
 		'util.logger',
 		'services.getReadmeService'
 	],
-	extImports: [
+	externals: [
 		'express'
 	],
 	init: init

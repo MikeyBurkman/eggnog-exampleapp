@@ -1,8 +1,8 @@
 module.exports = {
-	imports: [
+	locals: [
 		'util.logger'
 	],
-	extImports: [
+	externals: [
 		'request',
 		'q'
 	],
