@@ -1,16 +1,16 @@
 module.exports = {
-	globals: ['console'],
+	requires: [
+		'global::console'
+	],
 	init: init
-}
+};
 
-function init(eggnog) {
+function init(console) {
 
-	eggnog.exports = {
+	this.exports = {
 		debug: debug,
 		error: error
 	};
-	
-	var console = eggnog.import('console');
 
 	function debug() {
 		console.log.apply(console, prependArgs('DEBUG: ', arguments));
@@ -25,4 +25,4 @@ function init(eggnog) {
 		argsArray.unshift(x);
 		return argsArray;
 	}
-}
+};

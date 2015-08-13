@@ -1,19 +1,14 @@
 module.exports = {
 	isMain: true,
-	locals: [
-		'util.logger',
-		'services.getReadmeService'
-	],
-	externals: [
-		'express'
+	requires: [
+		'util/logger',
+		'services/getReadmeService',
+		'lib::express'
 	],
 	init: init
 };
 
-function init(eggnog) {
-	var express = eggnog.import('express');
-	var readmeService = eggnog.import('services.getReadmeService');
-	var logger = eggnog.import('util.logger');
+function init(logger, getReadmeService, express) {
 
 	var app = express();
 
@@ -28,7 +23,7 @@ function init(eggnog) {
 	});
 
 	function getReadme(user, project, response) {
-		readmeService
+		getReadmeService
 			.getReadme(user, project)
 			.then(function(readme) {
 				logger.debug('Got readme back for ', user, ':', project);

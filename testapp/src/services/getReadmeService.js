@@ -1,43 +1,34 @@
 module.exports = {
-	locals: [
-		'util.logger'
-	],
-	externals: [
-		'request',
-		'q'
+	requires: [
+		'lib::request',
+		'lib::bluebird',
+		'services/endpoints',
+		'util/logger'
 	],
 	init: init
 }
 
-// constant
-var github = 'https://raw.githubusercontent.com';
+function init(endpoints, logger, request) {
 
-function init(eggnog) {
+	var Promise = this.require('lib::bluebird');
 
-	var logger = eggnog.import('util.logger');
-
-	eggnog.exports = {
+	this.exports = {
 		getReadme: getReadme
 	};
 
-	var request = eggnog.import('request');
-	var q = eggnog.import('q');
-
 	function getReadme(user, project) {
-		var defer = q.defer();
-
-		var path = github + '/' + user + '/' + project + '/master/README.md';
-		request(path, function (error, response, body) {
-			logger.debug('readme path = ', path);
-			if (error) {
-				defer.reject(error);
-			} else if (response.statusCode >= 400) {
-				defer.reject(response.statusCode + ' : ' + body);
-			} else {
-				defer.resolve(body);
-			}
+		return new Promise(function(resolve, reject) {
+			var path = endpoints.github + '/' + user + '/' + project + '/master/README.md';
+			request(path, function (error, response, body) {
+				logger.debug('readme path = ', path);
+				if (error) {
+					reject(error);
+				} else if (response.statusCode >= 400) {
+					reject(response.statusCode + ' : ' + body);
+				} else {
+					resolve(body);
+				}
+			});
 		});
-
-		return defer.promise;
 	}
 }
