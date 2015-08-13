@@ -3,7 +3,7 @@ eggnog-exampleapp
 
 ### Example usage of eggnog dependency injection.
 
-`node startup.js`
+`node index.js`
 
 This starts up a small Express.js server
 Navigate to http://localhost:3000 to see the readme for eggnog.
@@ -11,10 +11,10 @@ Navigate to http://localhost:3000/:user/:project, where user and project are a G
 
 ### Unit Testing
 
-`node unitTestExample.js`
+`mocha`
 
-The unit test file shows how you can create a context capable of creating single modules, where you can directly specify the dependency implementations that the module will use.
+There is nothing special with how Mocha is run. (Assuming that Mocha is installed, of course.) Mocha will automatically scan the `test/` directory for tests.
 
-For instance, you can provide a module with mock dependencies for verifying that everything is called correctly.
+In each test file, a TestContext is created, and the system under test (sut) is created with mock dependencies. Each test is then executed against that sut.
 
-(This example shows how you test individual dependencies. It is strongly recommended that you use a proper unit testing framework.)
+(Note: The unit tests are currently under work. Writing unit tests for files that use bluebird and request are not trivial.)
