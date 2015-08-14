@@ -7,7 +7,7 @@ module.exports = {
 
 function init(console) {
 
-	this.exports = {
+	return {
 		debug: debug,
 		error: error
 	};

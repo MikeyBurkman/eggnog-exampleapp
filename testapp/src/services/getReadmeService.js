@@ -12,11 +12,7 @@ function init(endpoints, logger, request) {
 
 	var Promise = this.require('lib::bluebird');
 
-	this.exports = {
-		getReadme: getReadme
-	};
-
-	function getReadme(user, project) {
+	return function(user, project) {
 		return new Promise(function(resolve, reject) {
 			var path = endpoints.github + '/' + user + '/' + project + '/master/README.md';
 			request(path, function (error, response, body) {

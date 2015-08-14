@@ -23,8 +23,7 @@ function init(logger, getReadmeService, express) {
 	});
 
 	function getReadme(user, project, response) {
-		getReadmeService
-			.getReadme(user, project)
+		getReadmeService(user, project)
 			.then(function(readme) {
 				logger.debug('Got readme back for ', user, ':', project);
 				response.send(readme);
@@ -38,5 +37,7 @@ function init(logger, getReadmeService, express) {
 
 	app.listen(3000);
 	logger.debug('started server on port: 3000');
+
+	return app;
 
 }
