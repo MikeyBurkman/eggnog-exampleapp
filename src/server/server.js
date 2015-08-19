@@ -1,14 +1,7 @@
-module.exports = {
-	isMain: true,
-	requires: [
-		'util/logger',
-		'services/getReadmeService',
-		'lib::express'
-	],
-	init: init
-};
-
-function init(logger, getReadmeService, express) {
+module.exports = function(
+	/* util/logger */ logger,
+	/* services/getReadmeService */ svc,
+	/* lib::express */  express) {
 
 	var app = express();
 
@@ -23,7 +16,7 @@ function init(logger, getReadmeService, express) {
 	});
 
 	function getReadme(user, project, response) {
-		getReadmeService(user, project)
+		svc(user, project)
 			.then(function(readme) {
 				logger.debug('Got readme back for ', user, ':', project);
 				response.send(readme);
@@ -40,4 +33,4 @@ function init(logger, getReadmeService, express) {
 
 	return app;
 
-}
+};

@@ -1,16 +1,8 @@
-module.exports = {
-	requires: [
-		'lib::request',
-		'lib::bluebird',
-		'services/endpoints',
-		'util/logger'
-	],
-	init: init
-}
-
-function init(endpoints, logger, request) {
-
-	var Promise = this.require('lib::bluebird');
+module.exports = function(
+	/* services/endpoints */ endpoints,
+	/* util/logger */ logger,
+	/* lib::request */ request,
+	/* lib::bluebird */ Promise) {
 
 	return function(user, project) {
 		return new Promise(function(resolve, reject) {
@@ -27,4 +19,4 @@ function init(endpoints, logger, request) {
 			});
 		});
 	}
-}
+};

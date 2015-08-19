@@ -1,11 +1,4 @@
-module.exports = {
-	requires: [
-		'global::console'
-	],
-	init: init
-};
-
-function init(console) {
+module.exports = function(/* global::console */ console) {
 
 	return {
 		debug: debug,
