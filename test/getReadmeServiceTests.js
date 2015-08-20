@@ -4,7 +4,7 @@ var expect = require('expect.js');
 var spy = require('spy');
 
 describe('getReadmeService tests', function() {
-  var context = new eggnog.TestContext('src');
+  var context = new eggnog.TestContext('./src');
 
   var mockBluebird = spy();
   var mockRequest = spy();

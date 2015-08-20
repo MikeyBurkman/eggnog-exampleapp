@@ -1,6 +1,6 @@
 
-var eggnog = require('eggnog')
+var eggnog = require('eggnog');
 
-var ctx = new eggnog.Context('src');
+var context = new eggnog.Context('./src');
 
-ctx.loadModule('server/server');
+context.loadModule('server/server');

@@ -4,7 +4,7 @@ var expect = require('expect.js');
 var spy = require('spy');
 
 describe('logger tests', function() {
-  var context = new eggnog.TestContext('src');
+  var context = new eggnog.TestContext('./src');
 
   var mockConsole = {
     log: spy()
