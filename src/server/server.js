@@ -1,7 +1,8 @@
 module.exports = function(
 	/* util/logger */ logger,
 	/* services/getReadmeService */ svc,
-	/* lib::express */  express) {
+	/* lib::express */  express,
+	/* core::os */ os) {
 
 	var app = express();
 
@@ -28,8 +29,8 @@ module.exports = function(
 			});
 	}
 
-	app.listen(3000);
-	logger.debug('started server on port: 3000');
+	var server = app.listen(3000);
+	logger.debug('started server on port: 3000 on system: ', os.type());
 
 	return app;
 
