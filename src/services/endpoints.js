@@ -1,5 +1,7 @@
 module.exports = function() {
   return {
-    github: 'https://raw.githubusercontent.com'
+    external: {
+      github: 'https://raw.githubusercontent.com'
+    }
   };
 }

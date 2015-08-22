@@ -10,7 +10,7 @@ describe('getReadmeService tests', function() {
   var mockRequest = spy();
   var sut = context.createModule('services/getReadmeService', {
     'util/logger': {debug: function() {}}, // Don't care
-    'services/endpoints.github': 'http://something.com',
+    'services/endpoints.external.github': 'http://something.com',
     'lib::request': mockRequest,
     'lib::bluebird': mockBluebird
   });

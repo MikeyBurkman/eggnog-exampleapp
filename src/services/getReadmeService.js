@@ -1,5 +1,5 @@
 module.exports = function(
-	/* services/endpoints.github */ githubEndpoint,
+	/* services/endpoints.external.github */ githubEndpoint,
 	/* util/logger */ logger,
 	/* lib::request */ request,
 	/* lib::bluebird */ Promise) {
