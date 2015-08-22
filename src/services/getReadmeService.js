@@ -1,12 +1,12 @@
 module.exports = function(
-	/* services/endpoints */ endpoints,
+	/* services/endpoints.github */ githubEndpoint,
 	/* util/logger */ logger,
 	/* lib::request */ request,
 	/* lib::bluebird */ Promise) {
 
 	return function(user, project) {
 		return new Promise(function(resolve, reject) {
-			var path = endpoints.github + '/' + user + '/' + project + '/master/README.md';
+			var path = githubEndpoint + '/' + user + '/' + project + '/master/README.md';
 			request(path, function (error, response, body) {
 				logger.debug('readme path = ', path);
 				if (error) {
